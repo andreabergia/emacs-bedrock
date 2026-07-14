@@ -67,5 +67,5 @@
 (use-package olivetti
   :ensure t
   ;; Uncomment below to make olivetti-mode turn on automatically in certain modes
-  ; :hook ((markdown-mode . olivetti-mode))
+  :hook ((markdown-mode . olivetti-mode))
   )
