@@ -74,26 +74,8 @@
 (when (display-graphic-p)
   (context-menu-mode))
 
-;; Don't litter file system with *~ backup files; put them all inside
-;; ~/.emacs.d/backup or wherever
-(defun bedrock--backup-file-name (fpath)
-  "Return a new file path of a given file path.
-If the new path's directories does not exist, create them."
-  (let* ((backupRootDir (concat user-emacs-directory "emacs-backup/"))
-         (filePath (replace-regexp-in-string "[A-Za-z]:" "" fpath )) ; remove Windows driver letter in path
-         (backupFilePath (replace-regexp-in-string "//" "/" (concat backupRootDir filePath "~") )))
-    (make-directory (file-name-directory backupFilePath) (file-name-directory backupFilePath))
-    backupFilePath))
-(setopt make-backup-file-name-function 'bedrock--backup-file-name)
-
-;; The above creates nested directories in the backup folder. If
-;; instead you would like all backup files in a flat structure, albeit
-;; with their full paths concatenated into a filename, then you can
-;; use the following configuration:
-;; (Run `'M-x describe-variable RET backup-directory-alist RET' for more help)
-;;
-;; (let ((backup-dir (expand-file-name "emacs-backup/" user-emacs-directory)))
-;;   (setopt backup-directory-alist `(("." . ,backup-dir))))
+;; Don't create *~ backup files at all.
+(setopt make-backup-files nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
