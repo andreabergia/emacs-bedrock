@@ -120,7 +120,7 @@
 ;; icomplete-vertical, or fido-mode. See also the file extras/base.el
 
 ;(icomplete-vertical-mode)
-;(fido-vertical-mode)
+(fido-vertical-mode)
 ;(setopt icomplete-delay-completions-threshold 4000)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
