@@ -250,3 +250,44 @@
  )
 
 (setq gc-cons-threshold (or bedrock--initial-gc-threshold 800000))
+
+;;; ANDREA
+
+;; No BIDI
+(setq-default bidi-display-reordering 'left-to-right
+              bidi-paragraph-direction 'left-to-right)
+(setq bidi-inhibit-bpa t)
+
+; Maybe faster?
+(setq redisplay-skip-fontification-on-input t)
+
+; Bigger buffer for LSPs
+(setq read-process-output-max (* 4 1024 1024)) ; 4MB
+
+; No cursor in background windows
+(setq-default cursor-in-non-selected-windows nil)
+(setq highlight-nonselected-windows nil)
+
+; This setting makes Emacs save the existing clipboard content into the kill ring before overwriting it:
+; Now C-y gets the kill, and M-y gets you back to the URL. Such a small thing, but it eliminates a genuinely annoying problem.
+(setq save-interprogram-paste-before-kill t)
+
+; No duplicate in kill ring
+(setq kill-do-not-save-duplicates t)
+
+; If saving a new shell file, chmod +x it
+(add-hook 'after-save-hook
+          #'executable-make-buffer-file-executable-if-script-p)
+
+; Reversible C-x 1
+(winner-mode +1)
+
+(defun toggle-delete-other-windows ()
+  "Delete other windows in frame if any, or restore previous window config."
+  (interactive)
+  (if (and winner-mode
+           (equal (selected-window) (next-window)))
+      (winner-undo)
+    (delete-other-windows)))
+
+(global-set-key (kbd "C-x 1") #'toggle-delete-other-windows)
