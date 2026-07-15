@@ -51,3 +51,9 @@
 ;; no duplicate in kill ring
 (setq kill-do-not-save-duplicates t)
 
+;; ask for confirmation before exiting Emacs (C-x C-c)
+(setq confirm-kill-emacs 'y-or-n-p)
+
+;; accept "y"/"n" instead of "yes"/"no" in confirmation prompts
+(setopt use-short-answers t)
+
