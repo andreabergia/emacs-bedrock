@@ -24,6 +24,7 @@
 (my-config-load "lang-yaml.el")
 (my-config-load "lang-json.el")
 (my-config-load "vim.el")
+(my-config-load "keybindings.el")
 
 (setq gc-cons-threshold (or bedrock--initial-gc-threshold 800000))
 (custom-set-variables
