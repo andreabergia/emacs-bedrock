@@ -20,9 +20,9 @@
 (keymap-set project-prefix-map "u" 'project-remember-projects-under)
 
 (defun my-project-switch-project (dir)
-  "Switch to project at DIR: cd into it and list its files.
+  "Switch to project at DIR: cd into it and open a Dired listing of its root.
 Skips the `project-switch-commands' prompt entirely."
   (interactive (list (project-prompt-project-dir)))
-  (let ((default-directory dir)
-        (project-current-directory-override dir))
-    (project-find-file)))
+  (let ((project-current-directory-override dir))
+    (dired dir)
+    (cd dir)))
