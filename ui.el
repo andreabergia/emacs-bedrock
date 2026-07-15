@@ -20,13 +20,65 @@
 ;; show column as well
 (setopt column-number-mode t)
 
-;; nerd-icons defaults to looking for a separate "Symbols Nerd Font Mono"
-;; icon-only font; point it at our patched font instead, since that already
-;; has the same glyphs and we don't need to install a second font
-(use-package nerd-icons
+;; prettier, less cluttered mode-line: shows the git branch (via vc-mode)
+;; but hides the usual wall of minor-mode lighters
+(use-package mood-line
   :ensure t
-  :custom
-  (nerd-icons-font-family "JetBrainsMono Nerd Font Mono"))
+  :config
+  ;; mood-line ships ascii/fira-code/unicode glyph sets; since the default
+  ;; font is a Nerd Font, use the nicer unicode set for the buffer-status and
+  ;; checker segments (the git segment below draws its own icon)
+  (setq mood-line-glyph-alist mood-line-glyphs-unicode)
+
+  ;; mood-line's own vc segment distinguishes states via face color alone,
+  ;; and several of those faces turned out low-contrast in tokyo-night. So
+  ;; instead: pick the icon based on state (clean / locally modified / needs
+  ;; attention), always render it in one consistently high-contrast color,
+  ;; and append a `*' whenever the working tree isn't clean
+  (defface ab/mood-line-vc-branch '((t :inherit mood-line-major-mode))
+    "Face for the git branch segment in the mode-line.")
+  (tokyo-night-with-colors
+    (set-face-attribute 'ab/mood-line-vc-branch nil :foreground tokyo-green))
+
+  (defun ab/mood-line-segment-vc ()
+    "Show a git branch icon (varies with state) + name, `*' when dirty."
+    (when-let* ((file (buffer-file-name (buffer-base-buffer)))
+                (backend (vc-backend file))
+                (state (vc-state file))
+                (branch (mood-line-segment-vc--rev vc-mode backend)))
+      (let ((icon (cond
+                   ;; locally modified/added/untracked: pencil
+                   ((memq state '(edited added unregistered unlocked-changes)) ?\uF040)
+                   ;; needs attention: conflict, or diverged from upstream
+                   ((memq state '(needs-merge needs-update conflict removed)) ?\uF071)
+                   ;; clean: plain branch icon
+                   (t ?\uE0A0)))
+            (dirty (not (memq state '(up-to-date ignored)))))
+        (propertize (format "%c %s%s" icon branch (if dirty "*" ""))
+                    'face 'ab/mood-line-vc-branch))))
+
+  (defun ab/mood-line-segment-project-file ()
+    "Return the file path relative to the current project root, or the buffer name."
+    (propertize
+     (if-let* ((file (buffer-file-name (buffer-base-buffer)))
+               (proj (project-current))
+               (root (project-root proj)))
+         (file-relative-name file root)
+       (format-mode-line "%b"))
+     'face 'mood-line-buffer-name))
+
+  (setq mood-line-format
+        (mood-line-defformat
+         :left
+         (((mood-line-segment-buffer-status)      . " ")
+          ((ab/mood-line-segment-project-file)    . "  ")
+          (mood-line-segment-cursor-position))
+         :right
+         (((ab/mood-line-segment-vc)      . "  ")
+          ((mood-line-segment-major-mode) . "  ")
+          ((mood-line-segment-checker)    . "  "))))
+
+  (mood-line-mode))
 
 ;; prettier underlines
 (setopt x-underline-at-descent-line nil)
