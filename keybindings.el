@@ -34,6 +34,7 @@
 
     "a"   '(:ignore t :which-key "ai")
     "a c" '(agent-shell-anthropic-start-claude-code :which-key "claude code")
+    "a a" '(agent-shell-manager-toggle :which-key "manager")
 
     "p"   '(:ignore t :which-key "project")
     "p p" '(my-project-switch-project :which-key "switch project")

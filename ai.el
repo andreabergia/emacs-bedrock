@@ -28,3 +28,10 @@
          :inherit-env t
          "PATH" (concat (expand-file-name "~/.nvm/versions/node/v24.15.0/bin") ":"
                          (getenv "PATH")))))
+
+;; Tabulated-list view of all open agent-shell buffers (status, mode, model,
+;; pending permission requests) with kill/restart/create actions.
+;; Not on MELPA, so install straight from the source repo.
+(use-package agent-shell-manager
+  :vc (:url "https://github.com/jethrokuan/agent-shell-manager" :rev :newest)
+  :after agent-shell)
