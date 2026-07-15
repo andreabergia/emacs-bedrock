@@ -62,7 +62,8 @@
     "l f" '(eglot-format-buffer :which-key "format buffer")
     "l d" '(xref-find-definitions :which-key "find definition")
     "l R" '(xref-find-references :which-key "find references")
-    "l e" '(consult-flymake :which-key "diagnostics")
+    "l e" '((lambda () (interactive) (consult-flymake t)) :which-key "diagnostics (project)")
+    "l E" '(consult-flymake :which-key "diagnostics (buffer)")
 
     "t"   '(:ignore t :which-key "tab")
     "t n" '(tab-new :which-key "new tab")
