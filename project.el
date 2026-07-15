@@ -8,6 +8,11 @@
 ;; of the restricted default subset of commands
 (setopt project-switch-use-entire-map t)
 
+;; project-find-regexp / project-query-replace-regexp shell out to a search
+;; program; default to ripgrep instead of grep since it's much faster on
+;; large trees
+(setopt xref-search-program 'ripgrep)
+
 ;; for a top-level folder containing multiple big git repos (where the top
 ;; folder itself is not a repo): don't make the top folder a project, since
 ;; that would force a slow non-VC file listing across everything underneath.

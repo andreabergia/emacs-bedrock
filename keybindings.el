@@ -12,6 +12,7 @@
   (my-leader-def
     "f"   '(:ignore t :which-key "file")
     "f f" '(find-file :which-key "find file")
+    "f g" '(consult-fd :which-key "find file (fuzzy, fd)")
     "f r" '(consult-recent-file :which-key "recent files")
 
     "b"   '(:ignore t :which-key "buffer")
