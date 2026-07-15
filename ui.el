@@ -1,6 +1,9 @@
 ;;; ui.el --- Visual appearance & discoverability
 
-(load-theme 'modus-vivendi)
+(use-package tokyo-night
+  :ensure t
+  :config
+  (load-theme 'tokyo-night t))
 
 ;; default font
 (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font Mono" :height 160 :weight 'regular)
