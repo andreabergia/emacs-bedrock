@@ -2,6 +2,9 @@
 
 (load-theme 'modus-vivendi)
 
+;; default font
+(set-face-attribute 'default nil :family "JetBrainsMono Nerd Font Mono" :height 160 :weight 'regular)
+
 ;; show current line in modeline
 (setopt line-number-mode t)
 ;; show column as well
