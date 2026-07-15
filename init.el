@@ -22,6 +22,7 @@
 (my-config-load "dev.el")
 (my-config-load "dev-git.el")
 (my-config-load "dev-writing.el")
+(my-config-load "ai.el")
 (my-config-load "lang-markdown.el")
 (my-config-load "lang-yaml.el")
 (my-config-load "lang-json.el")

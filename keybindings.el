@@ -32,6 +32,9 @@
     "g B" '(magit-branch :which-key "branch")
     "g l" '(magit-log :which-key "log")
 
+    "a"   '(:ignore t :which-key "ai")
+    "a c" '(agent-shell-anthropic-start-claude-code :which-key "claude code")
+
     "p"   '(:ignore t :which-key "project")
     "p p" '(my-project-switch-project :which-key "switch project")
     "p f" '(project-find-file :which-key "find file")
