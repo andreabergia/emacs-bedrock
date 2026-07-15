@@ -32,6 +32,7 @@
     "p"   '(:ignore t :which-key "project")
     "p p" '(my-project-switch-project :which-key "switch project")
     "p f" '(project-find-file :which-key "find file")
+    "p d" '(project-dired :which-key "dired")
     "p b" '(project-switch-to-buffer :which-key "switch buffer")
     "p k" '(project-kill-buffers :which-key "kill buffers")
     "p a" '(project-remember-projects-under :which-key "add projects under dir")
