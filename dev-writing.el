@@ -10,7 +10,8 @@
   :bind (("C-;" . jinx-correct))
   :custom
   (jinx-camel-modes '(prog-mode))
-  (jinx-delay 0.01))
+  (jinx-delay 0.01)
+  (jinx-languages "en_US"))
 
 (use-package olivetti
   :ensure t

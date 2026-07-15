@@ -41,6 +41,10 @@
   :config
   (exec-path-from-shell-initialize))
 
+;; exec-path-from-shell doesn't copy LANG by default; set it explicitly so
+;; packages that key off locale (e.g. jinx) get a consistent language
+(setenv "LANG" "en_US.UTF-8")
+
 ;; No BIDI
 (setq-default bidi-display-reordering 'left-to-right
               bidi-paragraph-direction 'left-to-right)
