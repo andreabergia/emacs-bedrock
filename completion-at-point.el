@@ -38,3 +38,8 @@
   :after corfu
   :config
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+
+;; C-SPC normally pastes the last insertion in evil's insert state;
+;; rebind it to trigger completion instead, like in most editors.
+(with-eval-after-load 'evil
+  (define-key evil-insert-state-map (kbd "C-SPC") #'completion-at-point))
