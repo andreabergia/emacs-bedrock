@@ -30,6 +30,17 @@
 ;; don't create *~ backup files
 (setopt make-backup-files nil)
 
+;; send deleted files to the macOS Trash instead of deleting them permanently
+(setopt delete-by-moving-to-trash t)
+
+;; GUI Emacs on macOS is launched by launchd, not a shell, so it doesn't see
+;; PATH/env vars set in .zshrc etc.; this copies them over
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(mac ns))
+  :config
+  (exec-path-from-shell-initialize))
+
 ;; No BIDI
 (setq-default bidi-display-reordering 'left-to-right
               bidi-paragraph-direction 'left-to-right)
