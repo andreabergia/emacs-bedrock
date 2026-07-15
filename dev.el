@@ -1,20 +1,23 @@
 ;;; dev.el --- Core development configuration
 
-;; prefer treesitter modes; run M-x treesit-install-language-grammar first
-(setq major-mode-remap-alist
-      '((yaml-mode . yaml-ts-mode)
-        (bash-mode . bash-ts-mode)
-        (js2-mode . js-ts-mode)
-        (typescript-mode . typescript-ts-mode)
-        (json-mode . json-ts-mode)
-        (css-mode . css-ts-mode)
-        (python-mode . python-ts-mode)))
+;; auto-install tree-sitter grammars and switch to -ts-mode when available
+(use-package treesit-auto
+  :ensure t
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
 
 ;; show project name in modeline
 (use-package project
   :if (>= emacs-major-version 30)
   :custom
   (project-mode-line t))
+
+(use-package treesit-fold
+  :ensure t
+  :hook (prog-mode . treesit-fold-mode))
 
 (use-package eglot
   :custom
