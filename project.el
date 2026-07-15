@@ -109,6 +109,13 @@ later in the same session leaves it untouched."
   (add-hook 'persp-before-switch-hook
             (lambda () (my-persp-save-layout (persp-current-name))))
   ;; also save every perspective on quit, in case some were never
-  ;; explicitly switched away from during this session
+  ;; explicitly switched away from during this session. Wrapped in
+  ;; ignore-errors: this forces a real switch into each perspective in turn
+  ;; (see `my-persp-save-layout'), and one perspective with a stale window/
+  ;; buffer reference shouldn't stop the others from being saved.
   (add-hook 'kill-emacs-hook
-            (lambda () (mapc #'my-persp-save-layout (persp-names)))))
+            (lambda ()
+              (dolist (name (persp-names))
+                (condition-case err
+                    (my-persp-save-layout name)
+                  (error (message "Failed to save perspective `%s': %s" name err)))))))
