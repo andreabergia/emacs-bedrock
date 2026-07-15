@@ -46,6 +46,7 @@
     "p b" '(project-switch-to-buffer :which-key "switch buffer")
     "p k" '(project-kill-buffers :which-key "kill buffers")
     "p a" '(project-remember-projects-under :which-key "add projects under dir")
+    "p F" '(project-forget-project :which-key "forget project")
     "p s" '(consult-ripgrep :which-key "search (ripgrep)")
 
     "w"   '(:ignore t :which-key "frame")

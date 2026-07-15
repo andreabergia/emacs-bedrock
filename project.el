@@ -19,6 +19,18 @@
 ;; Instead, bulk-register the nested repos as their own fast projects.
 (keymap-set project-prefix-map "u" 'project-remember-projects-under)
 
+;; Package checkouts under elpa/ (e.g. installed via package-vc or straight)
+;; are git repos, so project.el auto-detects them as projects the moment any
+;; project-aware command runs inside one. That pollutes the project list
+;; (`project-list-file') with noise like elpa/some-package/. Skip remembering
+;; anything under elpa/ so it never gets added.
+(advice-add 'project-remember-project :around
+            (lambda (orig pr &rest args)
+              (unless (file-in-directory-p
+                       (project-root pr)
+                       (expand-file-name "elpa" user-emacs-directory))
+                (apply orig pr args))))
+
 (defvar my-persp-layout-directory (expand-file-name "var/persp-layouts/" user-emacs-directory)
   "Where each project's perspective (open files + window layout) is saved,
 so it can be restored the next time that project's perspective is created.")
