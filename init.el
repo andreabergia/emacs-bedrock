@@ -13,6 +13,7 @@
 (my-config-load "files.el")
 (my-config-load "project.el")
 (my-config-load "ui.el")
+(my-config-load "dashboard.el")
 (my-config-load "completion-minibuf.el")
 (my-config-load "completion-at-point.el")
 (my-config-load "search.el")
