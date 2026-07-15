@@ -13,16 +13,6 @@
   :bind (("C-c j" . avy-goto-line)
          ("s-j"   . avy-goto-char-timer)))
 
-(use-package eat
-  :ensure t
-  :custom
-  (eat-term-name "xterm")
-  :config
-  ;; use Eat to handle term codes in program output
-  (eat-eshell-mode)
-  ;; commands like less will be handled by Eat
-  (eat-eshell-visual-command-mode))
-
 (setopt dictionary-use-single-buffer t)
 (setopt dictionary-server "dict.org")
 

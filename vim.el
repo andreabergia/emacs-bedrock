@@ -8,6 +8,5 @@
   :config
   (evil-mode)
   (add-hook 'git-commit-setup-hook 'evil-insert-state)
-  (evil-set-initial-state 'eat-mode 'emacs)
   (evil-set-initial-state 'vterm-mode 'emacs))
 
