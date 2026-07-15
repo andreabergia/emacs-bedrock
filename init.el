@@ -23,8 +23,4 @@
 (my-config-load "lang-json.el")
 (my-config-load "vim.el")
 
-(custom-set-variables
- '(package-selected-packages nil))
-(custom-set-faces)
-
 (setq gc-cons-threshold (or bedrock--initial-gc-threshold 800000))
