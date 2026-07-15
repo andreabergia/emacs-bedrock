@@ -32,7 +32,7 @@
 ;; smooth scrolling
 (pixel-scroll-precision-mode)
 
-;; common keystrokes by default
+;; Common keystrokes by default
 (cua-mode)
 
 ;; for terminal users, make the mouse more useful
