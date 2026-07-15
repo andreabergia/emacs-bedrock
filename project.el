@@ -95,9 +95,10 @@ later in the same session leaves it untouched."
   ;; we drive perspectives entirely through our own SPC p / SPC t bindings,
   ;; so no need for persp-mode's own prefix key
   (setq persp-suppress-no-prefix-key-warning t)
-  ;; show only the current perspective name in the tab bar/mode line,
-  ;; instead of the full list of open perspectives
-  (setq persp-modestring-short t)
+  ;; the tab-bar already shows the current perspective name (see
+  ;; `tab-bar-format' in ui.el), so don't have perspective.el add its own
+  ;; copy to the mode-line as well
+  (setq persp-show-modestring nil)
   (persp-mode)
   :config
   ;; scope consult-buffer to the current perspective by default; all buffers

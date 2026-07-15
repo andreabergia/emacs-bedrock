@@ -20,6 +20,14 @@
 ;; show column as well
 (setopt column-number-mode t)
 
+;; nerd-icons defaults to looking for a separate "Symbols Nerd Font Mono"
+;; icon-only font; point it at our patched font instead, since that already
+;; has the same glyphs and we don't need to install a second font
+(use-package nerd-icons
+  :ensure t
+  :custom
+  (nerd-icons-font-family "JetBrainsMono Nerd Font Mono"))
+
 ;; prettier underlines
 (setopt x-underline-at-descent-line nil)
 ;; make switching buffers more consistent
