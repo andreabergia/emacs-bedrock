@@ -66,12 +66,10 @@
 ;; buttons are just clutter
 (setopt tab-bar-new-button-show nil)
 (setopt tab-bar-close-button-show nil)
-;; add the time to the tab-bar, if visible
+;; show the current perspective name (via the `perspective' package, see
+;; project.el) right-aligned in the tab-bar
 (add-to-list 'tab-bar-format 'tab-bar-format-align-right 'append)
 (add-to-list 'tab-bar-format 'tab-bar-format-global 'append)
-(setopt display-time-format "%a %F %T")
-(setopt display-time-interval 1)
-(display-time-mode)
 
 (use-package which-key
   :ensure t
