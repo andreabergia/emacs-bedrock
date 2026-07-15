@@ -52,6 +52,15 @@
     "w k" '(delete-frame :which-key "kill frame")
     "w o" '(other-frame :which-key "other frame")
 
+    "l"   '(:ignore t :which-key "lsp")
+    "l l" '(eglot :which-key "start")
+    "l r" '(eglot-rename :which-key "rename")
+    "l a" '(eglot-code-actions :which-key "code action")
+    "l f" '(eglot-format-buffer :which-key "format buffer")
+    "l d" '(xref-find-definitions :which-key "find definition")
+    "l R" '(xref-find-references :which-key "find references")
+    "l e" '(consult-flymake :which-key "diagnostics")
+
     "t"   '(:ignore t :which-key "tab")
     "t n" '(tab-new :which-key "new tab")
     "t t" '(my-new-terminal-tab :which-key "new terminal tab")
