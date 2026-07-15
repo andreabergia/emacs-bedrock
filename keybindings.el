@@ -5,9 +5,10 @@
   :after evil
   :config
   (general-create-definer my-leader-def
-    :states '(normal visual)
+    :states '(normal visual insert emacs)
     :keymaps 'override
-    :prefix "SPC")
+    :prefix "SPC"
+    :non-normal-prefix "M-SPC")
 
   (my-leader-def
     "f"   '(:ignore t :which-key "file")
