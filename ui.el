@@ -73,6 +73,18 @@
 
 (use-package which-key
   :ensure t
+  :custom
+  ;; which-key normally shrinks the popup to as few rows as possible (so it
+  ;; prefers many short columns); asking for a tall minimum instead makes it
+  ;; fill a single column top-to-bottom first, only spilling into more
+  ;; columns once the entries don't fit in that height
+  (which-key-min-display-lines 20)
+  (which-key-max-display-columns nil)
+  ;; extra gap between columns so key/description pairs don't run together
+  ;; when there are multiple columns
+  (which-key-add-column-padding 3)
+  (which-key-side-window-location 'bottom)
+  (which-key-side-window-max-height 0.4)
   :config
   (which-key-mode))
 
