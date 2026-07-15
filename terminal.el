@@ -9,3 +9,11 @@
   :bind (:map vterm-mode-map
               ("C-y" . vterm-yank)
               ("s-v" . vterm-yank)))
+
+(defun my-new-terminal-tab ()
+  "Open a new tab and start a new terminal (vterm) session in it.
+Passes a non-nil arg to `vterm' so it always creates a fresh session
+buffer instead of reusing an existing *vterm* buffer."
+  (interactive)
+  (tab-new)
+  (vterm t))

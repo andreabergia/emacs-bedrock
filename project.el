@@ -21,8 +21,25 @@
 
 (defun my-project-switch-project (dir)
   "Switch to project at DIR: cd into it and open a Dired listing of its root.
-Skips the `project-switch-commands' prompt entirely."
+Skips the `project-switch-commands' prompt entirely. Also switches to (or
+creates) a perspective named after the project, so each project's buffers
+stay isolated from other projects' via `persp-mode'."
   (interactive (list (project-prompt-project-dir)))
   (let ((project-current-directory-override dir))
+    (persp-switch (file-name-nondirectory (directory-file-name dir)))
     (dired dir)
     (cd dir)))
+
+(use-package perspective
+  :ensure t
+  :after consult
+  :init
+  ;; we drive perspectives entirely through our own SPC p / SPC t bindings,
+  ;; so no need for persp-mode's own prefix key
+  (setq persp-suppress-no-prefix-key-warning t)
+  (persp-mode)
+  :config
+  ;; scope consult-buffer to the current perspective by default; all buffers
+  ;; are still reachable via consult's narrowing (press "b")
+  (consult-customize consult-source-buffer :hidden t :default nil)
+  (add-to-list 'consult-buffer-sources persp-consult-source))

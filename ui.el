@@ -3,7 +3,14 @@
 (use-package tokyo-night
   :ensure t
   :config
-  (load-theme 'tokyo-night t))
+  (load-theme 'tokyo-night t)
+  ;; give the current tab a blue underline accent, and a subtle box around
+  ;; inactive tabs so adjacent ones stay visually separated
+  (tokyo-night-with-colors
+    (set-face-attribute 'tab-bar-tab nil
+                         :foreground tokyo-blue :underline t)
+    (set-face-attribute 'tab-bar-tab-inactive nil
+                         :box (list :line-width 2 :color tokyo-comment))))
 
 ;; default font
 (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font Mono" :height 160 :weight 'regular)
@@ -50,8 +57,15 @@
 (let ((hl-line-hooks '(text-mode-hook prog-mode-hook)))
   (mapc (lambda (hook) (add-hook hook 'hl-line-mode)) hl-line-hooks))
 
-;; show the tab-bar as soon as tab-bar functions are invoked
-(setopt tab-bar-show 1)
+;; always show the tab-bar, not just when there's more than one tab
+(tab-bar-mode 1)
+;; number each tab, so its position is clear at a glance (matches the SPC t o
+;; / SPC t p next/previous bindings)
+(setopt tab-bar-tab-hints t)
+;; we always create/close tabs via SPC t n / SPC t k, so the mouse-only +/x
+;; buttons are just clutter
+(setopt tab-bar-new-button-show nil)
+(setopt tab-bar-close-button-show nil)
 ;; add the time to the tab-bar, if visible
 (add-to-list 'tab-bar-format 'tab-bar-format-align-right 'append)
 (add-to-list 'tab-bar-format 'tab-bar-format-global 'append)

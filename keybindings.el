@@ -44,7 +44,14 @@
     "p b" '(project-switch-to-buffer :which-key "switch buffer")
     "p k" '(project-kill-buffers :which-key "kill buffers")
     "p a" '(project-remember-projects-under :which-key "add projects under dir")
-    "p s" '(consult-ripgrep :which-key "search (ripgrep)"))
+    "p s" '(consult-ripgrep :which-key "search (ripgrep)")
+
+    "t"   '(:ignore t :which-key "tab")
+    "t n" '(tab-new :which-key "new tab")
+    "t t" '(my-new-terminal-tab :which-key "new terminal tab")
+    "t k" '(tab-close :which-key "close tab")
+    "t o" '(tab-next :which-key "next tab")
+    "t p" '(tab-previous :which-key "previous tab"))
 
   ;; vim-unimpaired-style motions between git change hunks (needs diff-hl)
   (general-define-key
