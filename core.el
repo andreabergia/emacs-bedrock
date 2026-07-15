@@ -72,3 +72,5 @@
 ;; accept "y"/"n" instead of "yes"/"no" in confirmation prompts
 (setopt use-short-answers t)
 
+;; no audible or visible bell, ever
+(setopt ring-bell-function 'ignore)
