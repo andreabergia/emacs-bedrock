@@ -48,6 +48,7 @@
     "p a" '(project-remember-projects-under :which-key "add projects under dir")
     "p F" '(project-forget-project :which-key "forget project")
     "p s" '(consult-ripgrep :which-key "search (ripgrep)")
+    "p q" '((lambda () (interactive) (persp-switch "main")) :which-key "quit to dashboard")
 
     "w"   '(:ignore t :which-key "frame")
     "w n" '(make-frame :which-key "new frame")
