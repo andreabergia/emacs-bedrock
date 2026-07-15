@@ -46,6 +46,12 @@
     "p a" '(project-remember-projects-under :which-key "add projects under dir")
     "p s" '(consult-ripgrep :which-key "search (ripgrep)")
 
+    "w"   '(:ignore t :which-key "frame")
+    "w n" '(make-frame :which-key "new frame")
+    "w d" '(clone-frame :which-key "duplicate frame")
+    "w k" '(delete-frame :which-key "kill frame")
+    "w o" '(other-frame :which-key "other frame")
+
     "t"   '(:ignore t :which-key "tab")
     "t n" '(tab-new :which-key "new tab")
     "t t" '(my-new-terminal-tab :which-key "new terminal tab")
