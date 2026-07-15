@@ -24,7 +24,6 @@
 (my-config-load "dev-writing.el")
 (my-config-load "ai.el")
 (my-config-load "lang-markdown.el")
-(my-config-load "lang-yaml.el")
 (my-config-load "lang-json.el")
 (my-config-load "vim.el")
 (my-config-load "keybindings.el")
