@@ -9,5 +9,8 @@
   (evil-mode)
   (add-hook 'git-commit-setup-hook 'evil-insert-state)
   (evil-set-initial-state 'vterm-mode 'emacs)
-  (evil-set-initial-state 'dashboard-mode 'emacs))
+  ;; dashboard-mode stays in normal state (unlike vterm) so / and the
+  ;; SPC leader keys work there; RET is restored to dashboard's own
+  ;; open-item command, since evil's normal state would otherwise shadow it
+  (evil-define-key 'normal dashboard-mode-map (kbd "RET") 'dashboard-return))
 
