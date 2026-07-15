@@ -6,9 +6,6 @@
 
 (save-place-mode)
 
-;; restore open buffers and window layout from the previous session
-(desktop-save-mode 1)
-
 ;; colorize dired listings (directories, symlinks, dates, file types)
 (use-package diredfl
   :ensure t
