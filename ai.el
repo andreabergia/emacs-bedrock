@@ -27,7 +27,24 @@
         (agent-shell-make-environment-variables
          :inherit-env t
          "PATH" (concat (expand-file-name "~/.nvm/versions/node/v24.15.0/bin") ":"
-                         (getenv "PATH")))))
+                         (getenv "PATH"))))
+  ;; By default agent-shell writes each project's transcripts and
+  ;; screenshots into <project>/.agent-shell/, cluttering every project's
+  ;; checkout. Redirect those to one central location instead, keeping the
+  ;; same <project>/.agent-shell/<subdir> shape (so agent-recall's
+  ;; per-project grouping below still works) just rooted elsewhere.
+  ;; "worktrees" is left alone: it's an actual git worktree you create
+  ;; deliberately via `agent-shell-new-worktree-shell', not auto-generated
+  ;; clutter, and its path is always shown/editable when creating one.
+  (defun ab/agent-shell-dot-subdir (subdir)
+    (if (equal subdir "worktrees")
+        (agent-shell--dot-subdir-in-repo subdir)
+      (expand-file-name
+       (file-name-concat
+        (file-name-nondirectory (directory-file-name (agent-shell-cwd)))
+        ".agent-shell" subdir)
+       (locate-user-emacs-file "agent/shells/"))))
+  (setq agent-shell-dot-subdir-function #'ab/agent-shell-dot-subdir))
 
 ;; Tabulated-list view of all open agent-shell buffers (status, mode, model,
 ;; pending permission requests) with kill/restart/create actions.
@@ -35,3 +52,12 @@
 (use-package agent-shell-manager
   :vc (:url "https://github.com/jethrokuan/agent-shell-manager" :rev :newest)
   :after agent-shell)
+
+;; Search, browse, and resume agent-shell transcripts. Indexes the
+;; centralized transcripts directory configured above.
+(use-package agent-recall
+  :ensure t
+  :after agent-shell
+  :hook (agent-shell-mode . agent-recall-track-sessions)
+  :config
+  (setq agent-recall-search-paths (list (locate-user-emacs-file "agent/shells/"))))
