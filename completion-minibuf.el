@@ -41,4 +41,19 @@
 (use-package orderless
   :ensure t
   :config
-  (setq completion-styles '(orderless)))
+  (setq completion-styles '(orderless))
+  ;; adds flex (character-fuzzy) matching alongside literal/regexp components
+  (setq orderless-matching-styles '(orderless-literal orderless-regexp orderless-flex)))
+
+(use-package prescient
+  :ensure t
+  :config
+  (prescient-persist-mode))
+
+(use-package vertico-prescient
+  :ensure t
+  :after vertico
+  :config
+  ;; let orderless keep doing the filtering; prescient only reorders by frecency
+  (setq vertico-prescient-enable-filtering nil)
+  (vertico-prescient-mode))
