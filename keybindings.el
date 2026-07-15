@@ -26,4 +26,12 @@
     "s o" '(consult-outline :which-key "outline")
 
     "g"   '(:ignore t :which-key "git")
-    "g g" '(magit-status :which-key "status")))
+    "g g" '(magit-status :which-key "status")
+
+    "p"   '(:ignore t :which-key "project")
+    "p p" '(my-project-switch-project :which-key "switch project")
+    "p f" '(project-find-file :which-key "find file")
+    "p b" '(project-switch-to-buffer :which-key "switch buffer")
+    "p k" '(project-kill-buffers :which-key "kill buffers")
+    "p a" '(project-remember-projects-under :which-key "add projects under dir")
+    "p s" '(consult-ripgrep :which-key "search (ripgrep)")))
