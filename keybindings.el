@@ -37,6 +37,8 @@
 
     "a"   '(:ignore t :which-key "ai")
     "a c" '(agent-shell-anthropic-start-claude-code :which-key "claude code")
+    "a x" '(agent-shell-openai-start-codex :which-key "codex")
+    "a o" '(agent-shell-opencode-start-agent :which-key "opencode")
     "a a" '(agent-shell-manager-toggle :which-key "manager")
 
     "p"   '(:ignore t :which-key "project")

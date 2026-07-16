@@ -1,4 +1,4 @@
-;;; ai.el --- Claude Code, via agent-shell
+;;; ai.el --- Coding agents, via agent-shell
 
 ;; agent-shell is a chat buffer (built on comint) for talking to coding
 ;; agents through the Agent Client Protocol (ACP). For Claude Code, it
@@ -18,6 +18,18 @@
   ;; skip permission prompts for edits/commands --- otherwise the default
   ;; mode ("Manual") denies anything not pre-approved
   (agent-shell-anthropic-default-session-mode-id "bypassPermissions")
+  ;; Codex can authenticate with the same ChatGPT login used by the Codex CLI.
+  ;; It still needs the separate `codex-acp` adapter available on PATH.
+  (agent-shell-openai-authentication
+   (agent-shell-openai-make-authentication :login t))
+  ;; OpenCode manages its own login/config (`opencode auth login`), so no API
+  ;; key is passed through Emacs.
+  (agent-shell-opencode-authentication
+   (agent-shell-opencode-make-authentication :none t))
+  ;; OpenCode installs outside the usual shell PATH; point agent-shell directly
+  ;; at the binary and keep "acp" as its first argument.
+  (agent-shell-opencode-acp-command
+   (list (expand-file-name "~/.opencode/bin/opencode") "acp"))
   :config
   ;; ...and since the script itself starts with `#!/usr/bin/env node`, also
   ;; put that same directory on the *subprocess's* PATH, or node can't be found.
